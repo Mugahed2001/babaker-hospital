@@ -24,8 +24,8 @@
   --gutter: clamp(1.25rem, 5vw, 4rem);
   --pad-y: clamp(3.5rem, 9vw, 8rem);
 
-  --f-display: 800 clamp(2.3rem, 1rem + 5.4vw, 4.6rem)/1.06 "Tajawal", sans-serif;
-  --f-h2: 800 clamp(1.7rem, 1rem + 2.6vw, 2.7rem)/1.12 "Tajawal", sans-serif;
+  --f-display: 800 clamp(1.95rem, 1rem + 3.2vw, 3.4rem)/1.14 "Tajawal", sans-serif;
+  --f-h2: 800 clamp(1.6rem, 1rem + 2.2vw, 2.4rem)/1.16 "Tajawal", sans-serif;
   --f-h3: 700 1.15rem/1.35 "Tajawal", sans-serif;
   --tracking-over: .18em;
 }
@@ -173,7 +173,7 @@ svg { flex-shrink: 0; }
   display: flex; flex-direction: column; justify-content: center;
   border-inline-end: 1px solid var(--rule);
 }
-.hero__text h1 { font: var(--f-display); letter-spacing: -0.035em; }
+.hero__text h1 { font: var(--f-display); letter-spacing: -0.02em; }
 .hero__text h1 em { font-style: normal; color: var(--navy); }
 .hero__lead { margin-top: 1.6rem; font-size: 1.15rem; color: var(--ink-2); max-width: 42ch; }
 .hero__actions { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: .9rem; }
@@ -212,7 +212,12 @@ svg { flex-shrink: 0; }
   min-width: 0;
 }
 .outcome:first-child { border-inline-start: 0; }
-.outcome b { display: block; font-weight: 800; font-size: clamp(2rem, 1rem + 3.4vw, 3.2rem); line-height: 1.14; color: var(--navy); letter-spacing: -0.03em; }
+.outcome b {
+  display: block; font-weight: 800;
+  font-size: clamp(2.4rem, 1.4rem + 2.6vw, 3.3rem);
+  line-height: 1.12; color: var(--navy); letter-spacing: -0.02em;
+  direction: ltr; unicode-bidi: isolate; text-align: right;
+}
 .outcome span { display: block; margin-top: .55rem; font-weight: 700; font-size: .95rem; }
 .outcome small { display: block; margin-top: .35rem; font-size: .78rem; color: var(--ink-3); line-height: 1.6; }
 
