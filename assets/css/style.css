@@ -46,6 +46,10 @@ body {
 h1, h2, h3, h4 { color: var(--ink); letter-spacing: -0.02em; }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
+
+/* حارس: أي أيقونة SVG داخل رابط/زر لا تتضخّم أبدًا حتى لو غاب نمطها الخاص */
+svg { flex-shrink: 0; }
+:where(.utility, .mainnav, .link, .visitor-links, .foot-social, .pager, .crumbs) svg { width: 1.1em; height: 1.1em; }
 ::selection { background: var(--navy); color: #fff; }
 
 /* ---------- تخطيط ---------- */
