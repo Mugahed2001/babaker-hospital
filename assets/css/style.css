@@ -332,7 +332,14 @@ svg { flex-shrink: 0; }
 .foot-social a { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.22); display: grid; place-items: center; color: #fff; transition: .2s; }
 .foot-social a:hover { background: #fff; color: var(--navy-deep); }
 .foot-social svg { width: 17px; height: 17px; fill: currentColor; }
-.foot-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .6rem; padding-top: 1.8rem; font-size: .8rem; color: #7f82b4; }
+.foot-partners {
+  display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+  padding-top: 1.8rem; margin-top: 1.8rem;
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+.foot-partners span { font-size: .78rem; font-weight: 700; letter-spacing: var(--tracking-over); text-transform: uppercase; color: #7f82b4; }
+.foot-partners img { background: #fff; padding: 10px 16px; border-radius: 6px; height: 58px; width: auto; }
+.foot-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .6rem; padding-top: 1.8rem; margin-top: 1.8rem; border-top: 1px solid rgba(255,255,255,.14); font-size: .8rem; color: #7f82b4; }
 
 /* ---------- حالات ---------- */
 .loading { padding: 4rem var(--gutter); text-align: center; color: var(--ink-3); font-weight: 700; }
