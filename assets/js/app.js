@@ -147,11 +147,13 @@ async function viewHome() {
           <h2 style="font:var(--f-h2)">مواعيد العمل</h2>
           <div class="hours" style="margin-top:1.6rem">
             ${HOURS.map(function (h) {
-              return '<div class="' + (h.em ? "is-emergency" : "") + '"><span>' + h.k + '</span><span>' + h.v + '</span></div>';
+              return '<div class="' + (h.em ? "is-emergency" : "") + '"><span>' + h.k + '</span><span dir="ltr">' + h.v + '</span></div>';
             }).join("")}
           </div>
         </div>
         <div>
+          <span class="overline overline--light">وصول سريع</span>
+          <h2 style="font:var(--f-h2)">خدمات المرضى</h2>
           <div class="visitor-links">
             <a href="#/contact"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> حجز موعد</a>
             <a href="#/departments"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21C7 17 3 13 3 8.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 9 2.5C21 13 17 17 12 21z"/></svg> الطوارئ والإحالة</a>

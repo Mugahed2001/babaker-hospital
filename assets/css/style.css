@@ -209,35 +209,40 @@ svg { flex-shrink: 0; }
 .outcome {
   padding: clamp(1.8rem, 4vw, 3rem) 1.5rem;
   border-inline-start: 1px solid var(--rule-dark);
+  min-width: 0;
 }
 .outcome:first-child { border-inline-start: 0; }
-.outcome b { display: block; font-weight: 800; font-size: clamp(2rem, 1rem + 3.4vw, 3.2rem); line-height: 1; color: var(--navy); letter-spacing: -0.03em; }
-.outcome span { display: block; margin-top: .7rem; font-weight: 700; font-size: .95rem; }
-.outcome small { display: block; margin-top: .35rem; font-size: .78rem; color: var(--ink-3); }
+.outcome b { display: block; font-weight: 800; font-size: clamp(2rem, 1rem + 3.4vw, 3.2rem); line-height: 1.14; color: var(--navy); letter-spacing: -0.03em; }
+.outcome span { display: block; margin-top: .55rem; font-weight: 700; font-size: .95rem; }
+.outcome small { display: block; margin-top: .35rem; font-size: .78rem; color: var(--ink-3); line-height: 1.6; }
 
 /* ---------- شريط المرضى والزوّار ---------- */
-.visitors .wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
-.hours { border-top: 1px solid rgba(255,255,255,.16); }
+.visitors { padding-block: clamp(3rem, 6.5vw, 5rem); }
+.visitors .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 4.5rem); align-items: start; }
+.visitors .overline { margin-bottom: .9rem; }
+.visitors h2 { margin-bottom: 1.4rem; }
+.hours, .visitor-links { border-top: 1px solid rgba(255,255,255,.18); }
 .hours div {
-  display: flex; justify-content: space-between; gap: 1rem;
-  padding: .95rem 0; border-bottom: 1px solid rgba(255,255,255,.16);
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: .95rem 0; border-bottom: 1px solid rgba(255,255,255,.18);
   font-size: .98rem;
 }
-.hours div span:last-child { font-weight: 700; color: #fff; }
+.hours div span:last-child { font-weight: 700; color: #fff; direction: ltr; unicode-bidi: isolate; }
 .hours div.is-emergency span:last-child { color: #ff8f93; }
-.visitor-links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2.5rem; }
+.visitor-links { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.5rem; }
 .visitor-links a {
-  display: flex; align-items: center; gap: .8rem;
-  padding: 1.1rem 0; border-bottom: 1px solid rgba(255,255,255,.16);
-  font-weight: 700;
+  display: flex; align-items: center; gap: .75rem;
+  padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,.18);
+  font-weight: 700; font-size: .95rem;
 }
-.visitor-links a svg { width: 20px; height: 20px; color: var(--green); flex-shrink: 0; }
+.visitor-links a svg { color: var(--green); }
 .visitor-links a:hover { color: #fff; }
 
 /* ---------- أخبار ---------- */
-.news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--rule); }
+.news-grid { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 2.2rem; border-top: 1px solid var(--rule); }
 .news-card {
-  padding: 1.8rem var(--gutter) 1.8rem 0;
+  padding-block: 1.8rem 0;
+  padding-inline-start: 2.2rem;
   border-inline-start: 1px solid var(--rule);
   display: flex; flex-direction: column;
 }
