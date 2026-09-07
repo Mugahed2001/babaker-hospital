@@ -1,36 +1,48 @@
 /* ============================================================
    مستشفى صالح بابكر الخيري — واجهة حديثة
-   Design language: editorial clinical. Deep teal + warm paper +
-   restrained gold. Kufi display, humanist Arabic body. No
-   gradients-for-the-sake-of-it, no glassmorphism.
+   هوية مستمدة من الشعار: أحمر الهلال #e00010، أخضر السنبلة #90c020،
+   أزرق الشعار #202080. تصميم معاصر: مساحات واسعة، حواف ناعمة،
+   ظلال طبقية، تدرّجات دقيقة أحمر→أخضر.
    ============================================================ */
 
 :root {
-  --paper: #f7f4ee;
-  --paper-2: #efe9dd;
-  --ink: #14231f;
-  --ink-soft: #4a5a54;
-  --teal: #0d5c63;
-  --teal-deep: #08383d;
-  --teal-bright: #12868f;
-  --gold: #c19a4e;
-  --line: #d8cfbe;
+  /* هوية الشعار */
+  --red: #e2141f;
+  --red-deep: #b50d17;
+  --red-soft: #fdecec;
+  --green: #86c33d;
+  --green-deep: #5f9a1e;
+  --green-soft: #f0f7e4;
+  --indigo: #1e2472;
+  --indigo-deep: #151a54;
+  --indigo-soft: #eef0fb;
+
+  /* محايدات */
+  --bg: #ffffff;
+  --mist: #f5f7f1;
+  --cloud: #eef1f7;
+  --ink: #1c2140;
+  --ink-soft: #5b6079;
+  --line: #e7e9f1;
   --white: #ffffff;
-  --danger: #b23b3b;
-  --radius: 4px;
-  --arch: 140px;
-  --shadow: 0 18px 50px -24px rgba(8, 56, 61, .45);
-  --wrap: 1180px;
-  --step: clamp(1rem, 0.6rem + 1.6vw, 1.35rem);
+
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-lg: 32px;
+  --shadow-sm: 0 4px 16px -8px rgba(30, 36, 114, .25);
+  --shadow: 0 24px 60px -28px rgba(30, 36, 114, .38);
+  --shadow-red: 0 18px 40px -18px rgba(226, 20, 31, .45);
+  --grad: linear-gradient(90deg, var(--red), var(--green));
+  --wrap: 1200px;
+  --step: clamp(1rem, 0.62rem + 1.5vw, 1.3rem);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
   font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
   line-height: 1.85;
   font-size: 16px;
@@ -41,246 +53,281 @@ body {
 h1, h2, h3, h4 {
   font-family: "Reem Kufi", "IBM Plex Sans Arabic", sans-serif;
   font-weight: 600;
-  line-height: 1.3;
-  color: var(--teal-deep);
-  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--indigo);
+  letter-spacing: -0.02em;
 }
 
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
-
 .wrap { width: min(var(--wrap), 92vw); margin-inline: auto; }
 
-/* ---------- shared bits ---------- */
+/* ---------- عناصr مشتركة ---------- */
 .kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
+  display: inline-flex; align-items: center; gap: .6rem;
   font-family: "Reem Kufi", sans-serif;
-  font-size: .82rem;
-  letter-spacing: .16em;
-  color: var(--gold);
+  font-size: .8rem; font-weight: 600;
+  letter-spacing: .14em;
+  color: var(--red);
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
-.kicker::before {
-  content: "";
-  width: 34px; height: 1px;
-  background: var(--gold);
-}
+.kicker::before { content: ""; width: 28px; height: 3px; border-radius: 3px; background: var(--grad); }
 
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-  padding: .85rem 1.7rem;
-  font-family: "Reem Kufi", sans-serif;
-  font-size: .95rem;
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .95rem 1.9rem;
+  font-family: "Reem Kufi", sans-serif; font-size: .98rem; font-weight: 500;
   border-radius: 999px;
-  border: 1px solid var(--teal);
-  background: var(--teal);
+  border: 2px solid var(--red);
+  background: var(--red);
   color: #fff;
-  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease, border-color .2s;
 }
-.btn:hover { background: var(--teal-deep); transform: translateY(-2px); box-shadow: var(--shadow); }
-.btn--ghost { background: transparent; color: var(--teal-deep); }
-.btn--ghost:hover { background: var(--teal-deep); color: #fff; }
-.btn--gold { background: var(--gold); border-color: var(--gold); color: #2a2110; }
-.btn--gold:hover { background: #a9853f; border-color: #a9853f; color: #fff; }
+.btn:hover { background: var(--red-deep); border-color: var(--red-deep); transform: translateY(-3px); box-shadow: var(--shadow-red); }
+.btn--ghost { background: transparent; color: var(--indigo); border-color: var(--indigo); }
+.btn--ghost:hover { background: var(--indigo); border-color: var(--indigo); color: #fff; box-shadow: var(--shadow); }
+.btn--green { background: var(--green-deep); border-color: var(--green-deep); }
+.btn--green:hover { background: #4f8417; border-color: #4f8417; box-shadow: 0 18px 40px -18px rgba(95,154,30,.5); }
 
-.section { padding: clamp(3.5rem, 8vw, 7rem) 0; }
-.section__head { max-width: 640px; margin-bottom: 3rem; }
-.section__head h2 { font-size: clamp(1.7rem, 1rem + 3vw, 2.7rem); }
-.section__head p { margin-top: .8rem; color: var(--ink-soft); font-size: var(--step); }
-.section--paper2 { background: var(--paper-2); }
-.section--ink { background: var(--teal-deep); color: #dfeeef; }
+.section { padding: clamp(3.5rem, 8vw, 7.5rem) 0; }
+.section__head { max-width: 660px; margin-bottom: 3.2rem; }
+.section__head h2 { font-size: clamp(1.9rem, 1rem + 3.4vw, 3rem); }
+.section__head p { margin-top: 1rem; color: var(--ink-soft); font-size: var(--step); }
+.section--mist { background: var(--mist); }
+.section--ink { background: var(--indigo-deep); color: #cfd3f2; position: relative; overflow: hidden; }
 .section--ink h2, .section--ink h3 { color: #fff; }
-.section--ink .section__head p { color: #a8c6c8; }
-
-/* ---------- top bar ---------- */
-.topbar {
-  background: var(--teal-deep);
-  color: #cfe4e5;
-  font-size: .82rem;
-  letter-spacing: .02em;
+.section--ink .section__head p { color: #a9aede; }
+.section--ink::before {
+  content: ""; position: absolute; inset-inline-end: -120px; inset-block-start: -120px;
+  width: 360px; height: 360px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(134,195,61,.35), transparent 70%);
 }
-.topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .5rem 0; flex-wrap: wrap; }
+
+/* ---------- شريط علوي ---------- */
+.topbar {
+  background: var(--indigo-deep);
+  color: #b9bdf0;
+  font-size: .82rem;
+}
+.topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .55rem 0; flex-wrap: wrap; }
 .topbar a:hover { color: #fff; }
 .topbar__set { display: flex; gap: 1.4rem; align-items: center; }
+.topbar__set a:last-child { color: #ff8f97; font-weight: 600; }
 
-/* ---------- header ---------- */
+/* ---------- ترويسة ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 40;
-  background: rgba(247, 244, 238, .92);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, .88);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
+  transition: box-shadow .3s ease;
 }
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding: .9rem 0; }
-.brand { display: flex; align-items: center; gap: .8rem; }
-.brand__mark {
-  width: 46px; height: 46px; border-radius: 50%;
-  background: var(--teal); color: #fff;
-  display: grid; place-items: center;
-  font-family: "Reem Kufi", sans-serif; font-size: 1.35rem; font-weight: 700;
-  border: 2px solid var(--gold);
-}
-.brand__logo { width: 46px; height: 46px; object-fit: contain; flex-shrink: 0; }
-.brand__txt strong { display: block; font-family: "Reem Kufi", sans-serif; color: var(--teal-deep); font-size: 1.05rem; line-height: 1.2; }
+.site-header.scrolled { box-shadow: 0 10px 30px -18px rgba(30,36,114,.35); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding: .8rem 0; }
+.brand { display: flex; align-items: center; gap: .85rem; }
+.brand__logo { width: 52px; height: 52px; object-fit: contain; flex-shrink: 0; }
+.brand__txt strong { display: block; font-family: "Reem Kufi", sans-serif; color: var(--indigo); font-size: 1.08rem; line-height: 1.2; }
 .brand__txt span { font-size: .78rem; color: var(--ink-soft); }
 
-.nav { display: flex; align-items: center; gap: 1.9rem; }
-.nav a { font-family: "Reem Kufi", sans-serif; font-size: .98rem; color: var(--ink); padding: .3rem 0; position: relative; }
+.nav { display: flex; align-items: center; gap: 2rem; }
+.nav a { font-family: "Reem Kufi", sans-serif; font-size: .98rem; color: var(--ink); padding: .35rem 0; position: relative; }
 .nav a::after {
-  content: ""; position: absolute; inset-inline: 0; bottom: -4px;
-  height: 2px; background: var(--gold); transform: scaleX(0); transition: transform .25s ease;
+  content: ""; position: absolute; inset-inline: 0; bottom: -2px;
+  height: 3px; border-radius: 3px; background: var(--grad);
+  transform: scaleX(0); transform-origin: right; transition: transform .28s ease;
 }
 .nav a:hover::after, .nav a.is-active::after { transform: scaleX(1); }
-.nav a.is-active { color: var(--teal-deep); }
+.nav a.is-active { color: var(--indigo); }
 
-.nav-toggle { display: none; background: none; border: 0; cursor: pointer; }
-.nav-toggle span { display: block; width: 26px; height: 2px; background: var(--teal-deep); margin: 5px 0; transition: .25s; }
+.nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 6px; }
+.nav-toggle span { display: block; width: 26px; height: 3px; border-radius: 3px; background: var(--indigo); margin: 5px 0; transition: .25s; }
 
-/* ---------- hero ---------- */
-.hero { position: relative; padding: clamp(3rem, 7vw, 6rem) 0 0; }
+/* ---------- هيرو ---------- */
+.hero { position: relative; padding: clamp(3rem, 7vw, 6.5rem) 0 0; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset-block-start: -180px; inset-inline-start: -160px;
+  width: 520px; height: 520px; border-radius: 46% 54% 40% 60%;
+  background: radial-gradient(circle at 40% 40%, var(--green-soft), transparent 72%);
+  z-index: -1;
+}
 .hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
-.hero h1 { font-size: clamp(2.1rem, 1rem + 5vw, 4rem); }
-.hero p.lead { margin-top: 1.4rem; font-size: var(--step); color: var(--ink-soft); max-width: 46ch; }
-.hero__cta { margin-top: 2.2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero h1 { font-size: clamp(2.2rem, 1rem + 5.4vw, 4.2rem); }
+.hero h1 .u {
+  background: linear-gradient(transparent 62%, rgba(134,195,61,.4) 0);
+  padding-inline: .05em;
+}
+.hero p.lead { margin-top: 1.5rem; font-size: var(--step); color: var(--ink-soft); max-width: 46ch; }
+.hero__cta { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; }
 .hero__figure {
   position: relative;
-  border-radius: var(--arch) var(--arch) var(--radius) var(--radius);
-  overflow: hidden;
+  border-radius: var(--radius-lg);
   aspect-ratio: 4/5;
-  background: var(--paper-2);
+  background: var(--cloud);
   box-shadow: var(--shadow);
 }
-.hero__figure img { width: 100%; height: 100%; object-fit: cover; }
-.hero__badge {
-  position: absolute; inset-block-start: auto; inset-block-end: 22px; inset-inline-start: -22px;
-  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 1rem 1.3rem; box-shadow: var(--shadow); max-width: 210px;
+.hero__figure img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); position: relative; z-index: 1; }
+.hero__figure::after {
+  content: ""; position: absolute; inset: 18px -18px -18px 18px;
+  border: 3px solid var(--green); border-radius: var(--radius-lg); z-index: 0;
 }
-.hero__badge strong { font-family: "Reem Kufi", sans-serif; color: var(--gold); font-size: 1.6rem; display: block; }
+.hero__badge {
+  position: absolute; inset-block-end: 26px; inset-inline-start: -26px; z-index: 2;
+  background: #fff; border-radius: var(--radius-sm);
+  padding: 1rem 1.3rem; box-shadow: var(--shadow); max-width: 220px;
+  border-inline-start: 5px solid var(--red);
+}
+.hero__badge strong { font-family: "Reem Kufi", sans-serif; color: var(--red); font-size: 1.7rem; display: block; }
 .hero__badge span { font-size: .82rem; color: var(--ink-soft); }
 
-/* ---------- stat strip ---------- */
-.stats { margin-top: clamp(3rem, 7vw, 5rem); border-block: 1px solid var(--line); }
-.stats .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+/* ---------- شريط الإحصاءات ---------- */
+.stats { margin-top: clamp(3rem, 7vw, 5.5rem); }
+.stats .wrap {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: #fff; border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
 .stat { padding: 2rem 1rem; text-align: center; border-inline-start: 1px solid var(--line); }
 .stat:first-child { border-inline-start: 0; }
-.stat b { font-family: "Reem Kufi", sans-serif; font-size: clamp(1.8rem, 1rem + 3vw, 2.6rem); color: var(--teal); display: block; }
-.stat span { font-size: .9rem; color: var(--ink-soft); }
+.stat b {
+  font-family: "Reem Kufi", sans-serif; font-size: clamp(1.9rem, 1rem + 3vw, 2.7rem);
+  display: block; line-height: 1;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.stat span { font-size: .9rem; color: var(--ink-soft); margin-top: .4rem; display: block; }
 
-/* ---------- cards grid ---------- */
-.grid { display: grid; gap: 1.4rem; }
+/* ---------- شبكة البطاقات ---------- */
+.grid { display: grid; gap: 1.6rem; }
 .grid--3 { grid-template-columns: repeat(3, 1fr); }
 .grid--2 { grid-template-columns: repeat(2, 1fr); }
 
 .card {
-  background: var(--white);
+  background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 1.8rem;
-  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  padding: 1.9rem;
+  transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
   display: flex; flex-direction: column; gap: .7rem;
+  position: relative; overflow: hidden;
 }
-.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--teal-bright); }
-.card__no { font-family: "Reem Kufi", sans-serif; color: var(--gold); font-size: .9rem; letter-spacing: .1em; }
-.card h3 { font-size: 1.2rem; }
+.card::before {
+  content: ""; position: absolute; inset-block-start: 0; inset-inline: 0; height: 4px;
+  background: var(--grad); transform: scaleX(0); transform-origin: right; transition: transform .3s ease;
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: transparent; }
+.card:hover::before { transform: scaleX(1); }
+.card__no { font-family: "Reem Kufi", sans-serif; color: var(--green-deep); font-size: .88rem; font-weight: 600; letter-spacing: .06em; }
+.card h3 { font-size: 1.25rem; }
 .card p { color: var(--ink-soft); font-size: .95rem; }
-.card__more { margin-top: auto; font-family: "Reem Kufi", sans-serif; color: var(--teal); font-size: .9rem; }
-.card__more::after { content: " ←"; }
+.card__more { margin-top: auto; font-family: "Reem Kufi", sans-serif; color: var(--red); font-size: .92rem; font-weight: 500; }
+.card__more::after { content: " ←"; transition: margin .2s; }
+.card:hover .card__more::after { margin-inline-start: 4px; }
 
-/* ---------- news ---------- */
+/* ---------- أخبار (قائمة) ---------- */
 .news-item {
-  display: grid; grid-template-columns: 220px 1fr; gap: 1.6rem;
-  padding: 1.6rem 0; border-bottom: 1px solid var(--line); align-items: start;
+  display: grid; grid-template-columns: 240px 1fr; gap: 1.8rem;
+  padding: 1.8rem 0; border-bottom: 1px solid var(--line); align-items: start;
 }
 .news-item:first-child { padding-top: 0; }
-.news-item__thumb { border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/10; background: var(--paper-2); }
-.news-item__thumb img { width: 100%; height: 100%; object-fit: cover; }
-.news-item time { font-family: "Reem Kufi", sans-serif; font-size: .82rem; color: var(--gold); letter-spacing: .08em; }
-.news-item h3 { font-size: 1.15rem; margin-top: .3rem; }
-.news-item p { color: var(--ink-soft); font-size: .93rem; margin-top: .4rem; }
+.news-item:hover h3 { color: var(--red); }
+.news-item__thumb { border-radius: var(--radius-sm); overflow: hidden; aspect-ratio: 16/10; background: var(--cloud); }
+.news-item__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.news-item:hover .news-item__thumb img { transform: scale(1.05); }
+.news-item time { font-family: "Reem Kufi", sans-serif; font-size: .8rem; color: var(--green-deep); font-weight: 600; letter-spacing: .06em; }
+.news-item h3 { font-size: 1.18rem; margin-top: .35rem; transition: color .2s; }
+.news-item p { color: var(--ink-soft); font-size: .93rem; margin-top: .45rem; }
 
-/* ---------- article / page body ---------- */
-.prose { max-width: 760px; margin-inline: auto; }
-.prose p { margin: 1rem 0; color: #26332e; }
-.prose h1, .prose h2, .prose h3 { margin: 2rem 0 .8rem; }
-.prose h1 { font-size: clamp(1.6rem, 1rem + 3vw, 2.4rem); }
-.prose img { border-radius: var(--radius); margin: 1.5rem auto; }
-.prose iframe { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: var(--radius); margin: 1.5rem 0; }
+/* ---------- نص المقال / الصفحة ---------- */
+.prose { max-width: 780px; margin-inline: auto; }
+.prose p { margin: 1.05rem 0; color: #2c3157; }
+.prose h1, .prose h2, .prose h3 { margin: 2.2rem 0 .9rem; }
+.prose h1 { font-size: clamp(1.7rem, 1rem + 3vw, 2.5rem); }
+.prose h2 { font-size: 1.5rem; }
+.prose img { border-radius: var(--radius); margin: 1.8rem auto; box-shadow: var(--shadow-sm); }
+.prose iframe { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: var(--radius); margin: 1.8rem 0; }
 .prose ul, .prose ol { margin: 1rem 2rem; }
-.prose a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+.prose li { margin: .4rem 0; }
+.prose li::marker { color: var(--green-deep); }
+.prose a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
+.prose blockquote { border-inline-start: 4px solid var(--green); padding-inline-start: 1.2rem; margin: 1.5rem 0; color: var(--ink-soft); }
 
-.page-hero { background: var(--teal-deep); color: #fff; padding: clamp(3rem, 7vw, 5rem) 0; }
-.page-hero h1 { color: #fff; font-size: clamp(1.9rem, 1rem + 4vw, 3rem); }
-.page-hero p { color: #a8c6c8; margin-top: .6rem; }
-.breadcrumb { font-size: .82rem; color: #7fabad; margin-bottom: 1rem; font-family: "Reem Kufi", sans-serif; }
+.page-hero { background: var(--indigo-deep); color: #fff; padding: clamp(3rem, 7vw, 5.5rem) 0; position: relative; overflow: hidden; }
+.page-hero::before {
+  content: ""; position: absolute; inset-block-start: -80px; inset-inline-start: -80px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(226,20,31,.35), transparent 70%);
+}
+.page-hero h1 { color: #fff; font-size: clamp(2rem, 1rem + 4vw, 3.2rem); position: relative; }
+.page-hero p { color: #a9aede; margin-top: .7rem; position: relative; }
+.breadcrumb { font-size: .82rem; color: #8f95d4; margin-bottom: 1rem; font-family: "Reem Kufi", sans-serif; position: relative; }
 .breadcrumb a:hover { color: #fff; }
 
-/* ---------- hours ---------- */
+/* ---------- مواعيد العمل ---------- */
 .hours { list-style: none; display: grid; gap: .2rem; }
-.hours li { display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 0; border-bottom: 1px dashed rgba(255,255,255,.2); }
-.hours li b { font-family: "Reem Kufi", sans-serif; color: var(--gold); font-weight: 500; }
-.hours li.emergency b { color: #ff9a8a; }
+.hours li { display: flex; justify-content: space-between; gap: 1rem; padding: .95rem 0; border-bottom: 1px dashed rgba(255,255,255,.18); }
+.hours li b { font-family: "Reem Kufi", sans-serif; color: var(--green); font-weight: 500; }
+.hours li.emergency b { color: #ff8f97; }
 
-/* ---------- contact ---------- */
+/* ---------- تواصل ---------- */
 .contact-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; }
-.field { margin-bottom: 1.1rem; }
-.field label { display: block; font-family: "Reem Kufi", sans-serif; font-size: .9rem; margin-bottom: .4rem; color: var(--teal-deep); }
+.field { margin-bottom: 1.15rem; }
+.field label { display: block; font-family: "Reem Kufi", sans-serif; font-size: .9rem; margin-bottom: .45rem; color: var(--indigo); }
 .field input, .field textarea {
-  width: 100%; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: var(--radius);
-  font-family: inherit; font-size: .95rem; background: var(--white); color: var(--ink);
+  width: 100%; padding: .9rem 1.1rem; border: 1px solid var(--line); border-radius: var(--radius-sm);
+  font-family: inherit; font-size: .95rem; background: #fff; color: var(--ink); transition: border-color .2s, box-shadow .2s;
 }
-.field input:focus, .field textarea:focus { outline: 2px solid var(--teal-bright); border-color: transparent; }
-.contact-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; margin-bottom: 1rem; }
-.contact-card h4 { font-size: 1rem; margin-bottom: .3rem; }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 4px var(--green-soft); }
+.contact-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.7rem; margin-bottom: 1rem; border-inline-start: 5px solid var(--green); }
+.contact-card:nth-child(even) { border-inline-start-color: var(--red); }
+.contact-card h4 { font-size: 1.02rem; margin-bottom: .35rem; }
 .contact-card p { color: var(--ink-soft); font-size: .92rem; }
 
-/* ---------- footer ---------- */
-.site-footer { background: var(--teal-deep); color: #b9d4d5; padding: 4rem 0 1.5rem; margin-top: 4rem; }
-.site-footer h4 { color: #fff; font-size: 1rem; margin-bottom: 1rem; }
-.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.5rem; }
-.footer-grid a { display: block; padding: .3rem 0; font-size: .92rem; }
+/* ---------- تذييل ---------- */
+.site-footer { background: var(--indigo-deep); color: #b3b8e8; padding: 4.5rem 0 1.5rem; }
+.site-footer h4 { color: #fff; font-size: 1.02rem; margin-bottom: 1.1rem; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 2.5rem; }
+.footer-grid a { display: block; padding: .32rem 0; font-size: .92rem; color: #b3b8e8; }
 .footer-grid a:hover { color: #fff; }
-.socials { display: flex; gap: .7rem; margin-top: 1rem; }
+.socials { display: flex; gap: .7rem; margin-top: 1.1rem; }
 .socials a {
-  width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%;
-  display: grid; place-items: center; padding: 0; transition: .2s;
+  width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.22); border-radius: 50%;
+  display: grid; place-items: center; padding: 0; transition: .2s; color: #fff;
 }
-.socials a:hover { background: var(--gold); border-color: var(--gold); color: #2a2110; }
+.socials a:hover { background: var(--grad); border-color: transparent; transform: translateY(-3px); }
 .socials svg { width: 18px; height: 18px; fill: currentColor; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,.15); margin-top: 3rem; padding-top: 1.5rem; font-size: .82rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.14); margin-top: 3rem; padding-top: 1.5rem; font-size: .82rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; color: #8f95d4; }
 
-/* ---------- utility ---------- */
-.loading { text-align: center; padding: 3rem; color: var(--ink-soft); font-family: "Reem Kufi", sans-serif; }
+/* ---------- أدوات ---------- */
+.loading { text-align: center; padding: 3.5rem; color: var(--ink-soft); font-family: "Reem Kufi", sans-serif; }
 .spinner {
-  width: 34px; height: 34px; border: 3px solid var(--line); border-top-color: var(--teal);
-  border-radius: 50%; margin: 0 auto 1rem; animation: spin 1s linear infinite;
+  width: 36px; height: 36px; border: 3px solid var(--cloud); border-top-color: var(--red);
+  border-inline-end-color: var(--green); border-radius: 50%; margin: 0 auto 1rem; animation: spin 1s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.pager { display: flex; gap: .8rem; justify-content: center; margin-top: 2.5rem; }
-.pager button { padding: .6rem 1.2rem; border: 1px solid var(--line); background: var(--white); border-radius: 999px; cursor: pointer; font-family: "Reem Kufi", sans-serif; }
+.pager { display: flex; gap: .8rem; justify-content: center; align-items: center; margin-top: 3rem; }
+.pager button { padding: .65rem 1.3rem; border: 2px solid var(--line); background: #fff; border-radius: 999px; cursor: pointer; font-family: "Reem Kufi", sans-serif; transition: .2s; }
+.pager button:not(:disabled):hover { border-color: var(--red); color: var(--red); }
 .pager button:disabled { opacity: .4; cursor: not-allowed; }
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.in { opacity: 1; transform: none; }
 
-/* ---------- responsive ---------- */
-@media (max-width: 900px) {
+/* ---------- استجابة ---------- */
+@media (max-width: 920px) {
   .hero .wrap { grid-template-columns: 1fr; }
-  .hero__figure { aspect-ratio: 16/12; }
-  .hero__badge { inset-inline-start: auto; inset-inline-end: 16px; }
+  .hero__figure { aspect-ratio: 16/12; max-width: 520px; }
+  .hero__badge { inset-inline-start: auto; inset-inline-end: 12px; }
   .stats .wrap { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(3) { border-inline-start: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
   .grid--3, .grid--2 { grid-template-columns: 1fr; }
   .news-item { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .nav {
-    position: fixed; inset: 0 0 0 30%; background: var(--paper); flex-direction: column;
-    padding: 5rem 2rem; gap: 1.4rem; transform: translateX(100%); transition: transform .3s ease;
-    border-inline-start: 1px solid var(--line);
+    position: fixed; inset: 0 0 0 28%; background: #fff; flex-direction: column;
+    padding: 5.5rem 2rem; gap: 1.5rem; transform: translateX(100%); transition: transform .3s ease;
+    border-inline-start: 1px solid var(--line); box-shadow: var(--shadow);
   }
   .nav.open { transform: none; }
   .nav-toggle { display: block; z-index: 50; }
@@ -289,4 +336,8 @@ img { display: block; max-width: 100%; }
   .footer-grid { grid-template-columns: 1fr; }
   .topbar__set { gap: .9rem; }
   .brand__txt span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { scroll-behavior: auto; }
 }

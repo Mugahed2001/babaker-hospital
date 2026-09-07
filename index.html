@@ -89,7 +89,11 @@
     </div>
   </footer>
 
-  <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+    const hdr = document.querySelector(".site-header");
+    addEventListener("scroll", () => hdr.classList.toggle("scrolled", scrollY > 10), { passive: true });
+  </script>
   <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

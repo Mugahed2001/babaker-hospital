@@ -79,7 +79,7 @@ async function viewHome() {
       <div class="wrap">
         <div>
           <span class="kicker">خدمة متميّزة بأسعار رمزية</span>
-          <h1>رعاية صحية إنسانية<br>على أعلى مستوى</h1>
+          <h1>رعاية صحية <span class="u">إنسانية</span><br>على أعلى مستوى</h1>
           <p class="lead">مستشفى صالح بابكر الخيري — صرحٌ طبي خيري تأسّس عام ${CONTACT.founded}
           في وادي العين وحورة بحضرموت، يقدّم خدمات تشخيصية وعلاجية متطوّرة على مدار الساعة.</p>
           <div class="hero__cta">
