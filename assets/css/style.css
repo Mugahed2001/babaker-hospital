@@ -82,9 +82,16 @@ svg { flex-shrink: 0; }
 }
 .overline--red { color: var(--red); }
 .overline--light { color: #9a9dd0; }
-.overline .idx { color: var(--red); margin-inline-end: .6rem; }
+.overline .idx {
+  color: var(--red);
+  font-size: 1.05rem; font-weight: 800; letter-spacing: 0;
+  margin-inline-end: .75rem;
+  padding-inline-end: .7rem;
+  border-inline-end: 1px solid currentColor;
+  vertical-align: -0.12em;
+}
 
-.sec-head { max-width: 44ch; margin-bottom: clamp(2.2rem, 5vw, 3.6rem); }
+.sec-head { max-width: 44ch; margin-bottom: clamp(2.2rem, 5vw, 3.6rem); padding-inline-start: clamp(.6rem, 2vw, 1.6rem); }
 .sec-head h2 { font: var(--f-h2); }
 .sec-head p { margin-top: 1rem; color: var(--ink-2); font-size: 1.08rem; }
 .section--navy .sec-head p { color: #a9acd8; }
@@ -224,6 +231,7 @@ svg { flex-shrink: 0; }
 /* ---------- شريط المرضى والزوّار ---------- */
 .visitors { padding-block: clamp(3rem, 6.5vw, 5rem); }
 .visitors .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 4.5rem); align-items: start; }
+.visitors .wrap > div { padding-inline-start: clamp(.6rem, 2vw, 1.6rem); }
 .visitors .overline { margin-bottom: .9rem; }
 .visitors h2 { margin-bottom: 1.4rem; }
 .hours, .visitor-links { border-top: 1px solid rgba(255,255,255,.18); }
