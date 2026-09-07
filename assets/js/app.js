@@ -130,7 +130,7 @@ async function viewHome() {
           <h2>أرقام تختصر مسيرتنا</h2>
         </div>
       </div>
-      <div class="wrap framed" style="padding:0">
+      <div class="wrap">
         <div class="outcomes">
           <div class="outcome reveal"><b>${CONTACT.founded}</b><span>سنة التأسيس</span><small>خدمة متواصلة منذ أكثر من ربع قرن</small></div>
           <div class="outcome reveal"><b>+200 ألف</b><span>مستفيد من الخدمات</span><small>سكان وادي العين وحورة والمناطق المجاورة</small></div>
