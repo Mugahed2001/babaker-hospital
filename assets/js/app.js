@@ -1,10 +1,9 @@
 /* ============================================================
    موجّه الصفحات + العرض
    ============================================================ */
-import {
-  getPage, getDepartments, getNews, getPost,
-  cleanContent, stripTags, arDate, PAGE_IDS, SOURCE
-} from "./api.js";
+var getPage = BH.getPage, getDepartments = BH.getDepartments, getNews = BH.getNews,
+    getPost = BH.getPost, cleanContent = BH.cleanContent, stripTags = BH.stripTags,
+    arDate = BH.arDate, PAGE_IDS = BH.PAGE_IDS, SOURCE = BH.SOURCE;
 
 const app = document.getElementById("app");
 const HERO_IMG = SOURCE + "/wp-content/uploads/2024/02/slideb1.jpg";

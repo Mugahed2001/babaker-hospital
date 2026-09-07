@@ -2,88 +2,82 @@
    طبقة البيانات — تجلب المحتوى الحيّ من الموقع الأساسي
    عبر واجهة WordPress REST API المفتوحة.
    المصدر: https://babakerhospital.org/wp-json/wp/v2
+   سكربت كلاسيكي (بلا وحدات) ليعمل حتى عند فتح الملف مباشرةً.
    ============================================================ */
+(function (w) {
+  "use strict";
 
-const SOURCE = "https://babakerhospital.org";
-const API = SOURCE + "/wp-json/wp/v2";
+  var SOURCE = "https://babakerhospital.org";
+  var API = SOURCE + "/wp-json/wp/v2";
 
-/* معرفات ثابتة معروفة من الموقع الأساسي */
-export const PAGE_IDS = {
-  about: 23,          // من نحن
-  departmentsRoot: 32 // الأقسام (الأب)
-};
-export const NEWS_CATEGORY = 41; // تصنيف "الأخبار"
+  var PAGE_IDS = { about: 23, departmentsRoot: 32 };
+  var NEWS_CATEGORY = 41;
 
-const cache = new Map();
+  var cache = new Map();
 
-async function get(path) {
-  if (cache.has(path)) return cache.get(path);
-  const res = await fetch(API + path, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error("HTTP " + res.status + " — " + path);
-  const total = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
-  const data = await res.json();
-  const out = { data, totalPages: total };
-  cache.set(path, out);
-  return out;
-}
+  function get(path) {
+    if (cache.has(path)) return Promise.resolve(cache.get(path));
+    return fetch(API + path, { headers: { Accept: "application/json" } }).then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      var total = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
+      return res.json().then(function (data) {
+        var out = { data: data, totalPages: total };
+        cache.set(path, out);
+        return out;
+      });
+    });
+  }
 
-/* ---------- صفحات ---------- */
-export async function getPage(id) {
-  const { data } = await get(`/pages/${id}?_fields=id,title,content,link`);
-  return data;
-}
+  function getPage(id) {
+    return get("/pages/" + id + "?_fields=id,title,content,link").then(function (r) { return r.data; });
+  }
 
-/* الأقسام: كل الصفحات التي أبوها = صفحة "الأقسام" */
-export async function getDepartments() {
-  const { data } = await get(
-    `/pages?parent=${PAGE_IDS.departmentsRoot}&per_page=50&orderby=menu_order&order=asc` +
-    `&_fields=id,title,content,link,excerpt`
-  );
-  return data;
-}
+  function getDepartments() {
+    return get("/pages?parent=" + PAGE_IDS.departmentsRoot +
+      "&per_page=50&orderby=menu_order&order=asc&_fields=id,title,content,link,excerpt")
+      .then(function (r) { return r.data; });
+  }
 
-/* ---------- أخبار ---------- */
-export async function getNews(page = 1, perPage = 9) {
-  const { data, totalPages } = await get(
-    `/posts?categories=${NEWS_CATEGORY}&page=${page}&per_page=${perPage}` +
-    `&_fields=id,slug,title,excerpt,date,jetpack_featured_media_url,content`
-  );
-  return { items: data, totalPages };
-}
+  function getNews(page, perPage) {
+    page = page || 1; perPage = perPage || 9;
+    return get("/posts?categories=" + NEWS_CATEGORY + "&page=" + page + "&per_page=" + perPage +
+      "&_fields=id,slug,title,excerpt,date,jetpack_featured_media_url,content")
+      .then(function (r) { return { items: r.data, totalPages: r.totalPages }; });
+  }
 
-export async function getPost(id) {
-  const { data } = await get(
-    `/posts/${id}?_fields=id,title,content,date,link,jetpack_featured_media_url`
-  );
-  return data;
-}
+  function getPost(id) {
+    return get("/posts/" + id + "?_fields=id,title,content,date,link,jetpack_featured_media_url")
+      .then(function (r) { return r.data; });
+  }
 
-/* ---------- أدوات مساعدة ---------- */
-export function stripTags(html) {
-  const d = document.createElement("div");
-  d.innerHTML = html || "";
-  return (d.textContent || "").replace(/\s+/g, " ").trim();
-}
+  function stripTags(html) {
+    var d = document.createElement("div");
+    d.innerHTML = html || "";
+    return (d.textContent || "").replace(/\s+/g, " ").trim();
+  }
 
-/* ينظّف محتوى مُنشئ الصفحات القديم (اختصارات mhc_*) ويُبقي HTML المفيد */
-export function cleanContent(html) {
-  if (!html) return "";
-  let s = html
-    .replace(/\[\/?mhc_[^\]]*\]/g, "")     // اختصارات القوالب
-    .replace(/\[\/?vc_[^\]]*\]/g, "")
-    .replace(/&#8221;|&#8243;|&#8220;/g, '"')
-    .replace(/&#8217;|&#8216;/g, "'");
-  // أعد كتابة روابط الصور النسبية إلى المصدر
-  s = s.replace(/src="\/wp-content/g, `src="${SOURCE}/wp-content`);
-  return s;
-}
+  function cleanContent(html) {
+    if (!html) return "";
+    var s = html
+      .replace(/\[\/?mhc_[^\]]*\]/g, "")
+      .replace(/\[\/?vc_[^\]]*\]/g, "")
+      .replace(/&#8221;|&#8243;|&#8220;/g, '"')
+      .replace(/&#8217;|&#8216;/g, "'");
+    s = s.replace(/src="\/wp-content/g, 'src="' + SOURCE + '/wp-content');
+    return s;
+  }
 
-export function arDate(iso) {
-  try {
-    return new Intl.DateTimeFormat("ar-EG-u-nu-latn", {
-      year: "numeric", month: "long", day: "numeric"
-    }).format(new Date(iso));
-  } catch { return iso; }
-}
+  function arDate(iso) {
+    try {
+      return new Intl.DateTimeFormat("ar-EG-u-nu-latn", {
+        year: "numeric", month: "long", day: "numeric"
+      }).format(new Date(iso));
+    } catch (e) { return iso; }
+  }
 
-export { SOURCE };
+  w.BH = {
+    SOURCE: SOURCE, PAGE_IDS: PAGE_IDS, NEWS_CATEGORY: NEWS_CATEGORY,
+    getPage: getPage, getDepartments: getDepartments, getNews: getNews, getPost: getPost,
+    stripTags: stripTags, cleanContent: cleanContent, arDate: arDate
+  };
+})(window);
